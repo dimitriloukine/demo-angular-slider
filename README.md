@@ -14,9 +14,11 @@ Il ne supporte pas
 - click direct sur le rail
 - le css est fait à l'arrache
 
-Le scope de la démo est plus de démontrer l'approche qu'il faut avoir dans angular pour implémenter ce genre de composants de manière réutilisable et avec une approche réactive tant qu'à faire. 
+Le scope de la démo est plus de démontrer l'approche qu'il faut avoir dans angular pour implémenter ce genre de composants de manière réutilisable et avec une approche réactive tant qu'à faire.
 
-le composant se situe dans `app/shared/components/slider` et est utilisé dans `app/app.component`
+Le composant se situe dans `app/shared/components/slider` et est utilisé dans `app/app.component`. Il est utilisé avec un ngModel, mais peut aussi fonctionner via un formControl. 
+
+
 
 
 

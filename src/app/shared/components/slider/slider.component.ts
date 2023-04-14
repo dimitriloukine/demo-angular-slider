@@ -5,8 +5,7 @@ import { Observable, Subscription, filter, fromEvent, merge, mergeMap, takeUntil
 /* 
   le truc important ici, c'est le controll value accessor, c'est comme ça qu'on s'interface avec 
   l'api des forms d'angular.
-https://angular.io/api/forms/ControlValueAccessor
-
+  https://angular.io/api/forms/ControlValueAccessor
 */
 
 @Component({
