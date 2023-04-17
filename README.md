@@ -21,6 +21,7 @@ Il ne supporte pas
 Le scope de la démo est plus de démontrer l'approche qu'il faut avoir dans angular pour 
 - implémenter ce genre de composants de manière réutilisable en utilisant l'api des forms d'angular
 - avoir une approche réactive et esquiver les écueils 
+- j'ai rien fait pour rendre la logique facilement compréhensible, juste compacte
 
 Le composant se situe dans `app/shared/components/slider` et est utilisé dans `app/app.component`. Il est utilisé avec un ngModel, mais peut aussi fonctionner via un formControl. 
 
