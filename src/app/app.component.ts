@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title:string = 'demo-angular-slider';
-  someNumericValue:number = 9;
+  someNumericValue:number = 0;
 }

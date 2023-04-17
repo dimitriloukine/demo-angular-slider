@@ -38,8 +38,9 @@ export class SliderComponent implements OnInit, OnDestroy, ControlValueAccessor 
 
   private range:number = this.max - this.min;
   private ratio:number = this.height / this.range; // le ratio entre la taille du slider en pixels et la range de valeurs possibles
+  private precision:number = 0;
 
-  subscription:Subscription = new Subscription(); // voir ngOnDestroy()
+  private subscription:Subscription = new Subscription(); // voir ngOnDestroy()
 
   constructor(private myElement: ElementRef) {}
   /* 
@@ -49,8 +50,9 @@ export class SliderComponent implements OnInit, OnDestroy, ControlValueAccessor 
   ngOnInit():void {
     this.range = this.max - this.min // les valeurs récupérées via le @Input() le sont après que le composant soit instantié
     this.ratio = this.height / this.range; // donc on doit recalculer les propriétés qui vont avec.
+    this.precision = Math.floor(this.step) !== this.step ? this.step.toString().split(".")[1].length : 0; // decimal places of step
 
-    this.counterValue > this.min ? this.min : this.counterValue; // des fois que min aie une valeur superieure à 0
+    this.counterValue = this.clamp(this.counterValue); // des fois que min aie une valeur superieure à 0
     
     // on commence avec un truc un peu simple, scroller sur le rail ++/-- la valeur;
     // on crée un observable depuis un event de wheel sur le rail.
@@ -104,7 +106,7 @@ export class SliderComponent implements OnInit, OnDestroy, ControlValueAccessor 
 
         const offset:number = ( dragEvent.screenY - mousedownEvent.screenY );
         
-        this.counterValue = this.clamp(Math.round(offset / this.ratio / this.step) * this.step + this.lastCounterValue, this.min, this.max);
+        this.counterValue = this.clamp(Math.round(offset / this.ratio / this.step) * this.step + this.lastCounterValue);
         this.position = this.valueToPosition(this.counterValue)
         
         this.propagateChange(this.counterValue);
@@ -123,12 +125,12 @@ export class SliderComponent implements OnInit, OnDestroy, ControlValueAccessor 
   }
 
   increment():void{
-    this.counterValue = this.clamp(this.counterValue + this.step, this.min, this.max);
+    this.counterValue = this.clamp(this.counterValue + this.step);
     this.position = this.valueToPosition(this.counterValue); 
     this.propagateChange(this.counterValue);
   }
   decrement():void {
-    this.counterValue = this.clamp(this.counterValue - this.step, this.min, this.max);
+    this.counterValue = this.clamp(this.counterValue - this.step);
     this.position = this.valueToPosition(this.counterValue); 
     this.propagateChange(this.counterValue);
   }
@@ -138,14 +140,16 @@ export class SliderComponent implements OnInit, OnDestroy, ControlValueAccessor 
     return (value- this.min) * this.ratio
   }
 
-  clamp(value:number, min:number, max:number):number {
+  clamp(value:number):number {
     // je sais pas ou ça en est pour Math.clamp()
-    return Math.max(
+     const clampedValue = Math.max(
       this.min, Math.min(
         value,
         this.max
       )
     )
+
+    return Number.parseFloat(clampedValue.toFixed(this.precision));
   }
 
   /* 

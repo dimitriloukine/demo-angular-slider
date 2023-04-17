@@ -1,24 +1,28 @@
 # DemoAngularSlider
 
-## Une petite démo d'implementation de slier 
+## Une petite démo d'implementation de slider 
 
-J'ai pondu une petite démo d'implémentation de slider l'autre soir, parce qu'on a regardé le slider de Thibault, on a vu toute ce qui allait pas mais on a pas eu le temps d'aborder le manière de le faire comme il faut. 
+Un exemple de slider avec une approche appropriée à la manière dont fonctionnent angular et rxjs. 
 
 Ici, le slider est fonctionnel mais est implémenté de manière un peu naive.
-
 - support de la mousewheel
 - drag and drop du trolley
+- valeurs `min` `max` et `step` passés en attribut à au composant, de la même manière qu'à un `<input type="number">`
+- support de valeurs min max négatifs
+- support de step décimaux sans provoquer d'erreurs d'arrondi
 
 Il ne supporte pas
 - clavier
+- touchscreen
 - click direct sur le rail
-- le css est fait à l'arrache
+- disable
+- tooltip
 
-Le scope de la démo est plus de démontrer l'approche qu'il faut avoir dans angular pour implémenter ce genre de composants de manière réutilisable et avec une approche réactive tant qu'à faire.
+Le scope de la démo est plus de démontrer l'approche qu'il faut avoir dans angular pour 
+- implémenter ce genre de composants de manière réutilisable en utilisant l'api des forms d'angular
+- avoir une approche réactive et esquiver les écueils 
 
 Le composant se situe dans `app/shared/components/slider` et est utilisé dans `app/app.component`. Il est utilisé avec un ngModel, mais peut aussi fonctionner via un formControl. 
-
-
 
 
 
